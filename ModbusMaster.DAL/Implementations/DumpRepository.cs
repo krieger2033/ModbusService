@@ -28,26 +28,71 @@ namespace ModbusMaster.DAL.Implementations
                 ushort? response = null;
                 if (offset < result.Length) { response = result[offset]; }
 
-                Dump dump = new Dump() {
-                    DeviceId = register.DeviceId,
-                    RegisterType = register.Type,
-                    Offset = (ushort)(register.Offset + offset),
-                    Data = response,
-                    Date = DateTime.Now
-                };
-
-                Insert(dump);
+                AddDumpRecord(register, offset, response);
             }
         }
 
-        public int GetUnsavedChanges()
+        //TODO: Optimisation
+        public void AddEmptyChannelResult(Channel channel, bool isTimedOut)
         {
-            var changes = _context.ChangeTracker.Entries<Dump>()
-                            .Where(x => x.State == EntityState.Added)
-                            .Select(y => y.Entity)
-                            .ToList();
+            if(!isTimedOut) { AddEmptyChannelResult(channel); }
 
-            return _context.Dumps.Local.Count;
+            var unsavedDumps = GetUnsavedDumps();
+
+            channel.Devices.ToList().ForEach(device => { device.Registers.ToList().ForEach(register => {
+                for (ushort offset = 0; offset < register.Count; offset++)
+                {
+                    bool isAlreadyAdded = unsavedDumps.Exists(x => x.DeviceId == register.DeviceId && x.RegisterType == register.Type && x.Offset == register.Offset + offset);
+
+                    if (!isAlreadyAdded) { AddDumpRecord(register, offset); }
+                }
+            });});
+        }
+
+        public void AddEmptyChannelResult(Channel channel)
+        {
+            foreach(Device device in channel.Devices)
+            {
+                AddEmptyDeviceResult(device);
+            }
+        }
+
+        public void AddEmptyDeviceResult(Device device)
+        {
+            foreach (Register register in device.Registers)
+            {
+                AddEmptyRegisterResult(register);
+            }
+        }
+
+        public void AddEmptyRegisterResult(Register register)
+        {
+            for (ushort offset = 0; offset < register.Count; offset++)
+            {
+                AddDumpRecord(register, offset);
+            }
+        }
+
+        private void AddDumpRecord(Register register, ushort offset, ushort? data = null)
+        {
+            Dump dump = new Dump()
+            {
+                DeviceId = register.DeviceId,
+                RegisterType = register.Type,
+                Offset = (ushort)(register.Offset + offset),
+                Data = data,
+                Date = DateTime.Now
+            };
+
+            Insert(dump);
+        }
+
+        private List<Dump> GetUnsavedDumps()
+        {
+            return _context.ChangeTracker.Entries<Dump>()
+                    .Where(x => x.State == EntityState.Added)
+                    .Select(y => y.Entity)
+                    .ToList();
         }
     }
 }

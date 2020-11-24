@@ -33,9 +33,14 @@ namespace ModbusMaster.Service.Implemetations
 
                 Task task = Task.Run(() => ProcessChannel(currentChannel), stoppingToken);
 
-                bool res = task.Wait(1000, stoppingToken); // timeout
+                bool isTimedOut = task.Wait(1000, stoppingToken); // timeout
 
-                _logger.LogInformation("{date} - Channel {num} " + (res ? "processed" : "timed out"), DateTimeOffset.Now, currentChannel.Id);
+                if(isTimedOut)
+                {
+                    _unitOfWork.DumpsRepository.AddEmptyChannelResult(currentChannel, true);
+
+                    _logger.LogError("{date} - Channel {num} timed out", DateTimeOffset.Now, currentChannel.Id);
+                }
             });
 
             _unitOfWork.SaveChanges();
@@ -43,13 +48,21 @@ namespace ModbusMaster.Service.Implemetations
 
         private void ProcessChannel(Channel channel)
         {
-            IModbusClient client = GetModbusClient(channel); // exception(?): wrong channel data
+            IModbusClient client = GetModbusClient(channel); // exception(?)
 
-            foreach (Device device in channel.Devices)
+            channel.Devices.ToList().ForEach(device =>
             {
-                ProcessDevice(client, device);
-                //_logger.LogInformation("{date} - Device {num} processed", DateTimeOffset.Now, device.Id);
-            }
+                try
+                {
+                    ProcessDevice(client, device);
+                }
+                catch (Exception e)
+                {
+                    _unitOfWork.DumpsRepository.AddEmptyDeviceResult(device);
+
+                    _logger.LogError("{date} - Device {num} error: {exception}", DateTimeOffset.Now, device.Id, e.Message);
+                }
+            });
         }
 
         private void ProcessDevice(IModbusClient client, Device device)
@@ -57,31 +70,46 @@ namespace ModbusMaster.Service.Implemetations
             client.SetSlave(device);
             client.Connect(); // exception: device connection
 
-            var dumpRepository = _unitOfWork.DumpsRepository;
-
-            foreach (Register register in device.Registers)
+            device.Registers.ToList().ForEach(register =>
             {
-
-                switch (register.Type) // exception: connection gone away(?), exception: wrong registers data
+                try
                 {
-                    case RegisterType.Coil:
-                        dumpRepository.AddRegisterResult(register, client.ReadCoils(register.Offset, register.Count));
-                        break;
-                    case RegisterType.DiscreteInput:
-                        dumpRepository.AddRegisterResult(register, client.ReadInputRegisters(register.Offset, register.Count));
-                        break;
-                    case RegisterType.HoldingRegister:
-                        dumpRepository.AddRegisterResult(register, client.ReadHoldingRegisters(register.Offset, register.Count));
-                        break;
-                    case RegisterType.Input:
-                        dumpRepository.AddRegisterResult(register, client.ReadInputs(register.Offset, register.Count));
-                        break;
+                    ProcessRegisterGroup(client, register); // exception: connection gone away(?), exception: wrong registers data
+                }
+                catch (Exception e)
+                {
+                    _unitOfWork.DumpsRepository.AddEmptyRegisterResult(register);
+
+                    _logger.LogError("{date} - Register group {num} error: {exception}", DateTimeOffset.Now, register.Id, e.Message);
                 }
 
-                //_logger.LogInformation("{date} - Register {num} processed", DateTimeOffset.Now, register.Id);
-            }
+                //_logger.LogInformation("{date} - Device {num} processed", DateTimeOffset.Now, device.Id);
+            });
 
             client.Disconnect();
+        }
+
+        private void ProcessRegisterGroup(IModbusClient client, Register register)
+        {
+            var dumpRepository = _unitOfWork.DumpsRepository;
+
+            switch (register.Type) 
+            {
+                case RegisterType.Coil:
+                    dumpRepository.AddRegisterResult(register, client.ReadCoils(register.Offset, register.Count));
+                    break;
+                case RegisterType.DiscreteInput:
+                    dumpRepository.AddRegisterResult(register, client.ReadInputRegisters(register.Offset, register.Count));
+                    break;
+                case RegisterType.HoldingRegister:
+                    dumpRepository.AddRegisterResult(register, client.ReadHoldingRegisters(register.Offset, register.Count));
+                    break;
+                case RegisterType.Input:
+                    dumpRepository.AddRegisterResult(register, client.ReadInputs(register.Offset, register.Count));
+                    break;
+            }
+
+            //_logger.LogInformation("{date} - Register {num} processed", DateTimeOffset.Now, register.Id);
         }
 
         private IModbusClient GetModbusClient(Channel channel)

@@ -17,7 +17,7 @@ namespace ModbusMaster.Domain.Entities
 
         public StopBits? StopBits { get; set; }
 
-        public virtual IEnumerable<Device> Devices { get; set; }
+        public virtual ICollection<Device> Devices { get; set; }
     }
 
     public enum ChannelType

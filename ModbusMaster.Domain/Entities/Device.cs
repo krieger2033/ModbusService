@@ -21,9 +21,9 @@ namespace ModbusMaster.Domain.Entities
         [ForeignKey("ChannelId")]
         public virtual Channel Channel { get; set; }
 
-        public virtual IEnumerable<Register> Registers { get; set; }
+        public virtual ICollection<Register> Registers { get; set; }
 
-        public virtual IEnumerable<Dump> Dumps { get; set; }
+        public virtual ICollection<Dump> Dumps { get; set; }
     }
 
     public enum DeviceType

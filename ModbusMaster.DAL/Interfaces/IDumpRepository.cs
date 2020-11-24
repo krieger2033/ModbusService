@@ -11,6 +11,12 @@ namespace ModbusMaster.DAL.Interfaces
 
         void AddRegisterResult(Register register, ushort[] result);
 
-        int GetUnsavedChanges();
+        void AddEmptyChannelResult(Channel channel, bool isTimedOut);
+
+        void AddEmptyChannelResult(Channel channel);
+
+        void AddEmptyDeviceResult(Device device);
+
+        void AddEmptyRegisterResult(Register register);
     }
 }

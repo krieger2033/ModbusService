@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 using ModbusMaster.DAL.Interfaces;
+using ModbusMaster.Domain.Entities;
 using ModbusMaster.Service.Interfaces;
 
 namespace ModbusMaster
@@ -26,12 +27,21 @@ namespace ModbusMaster
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            var channels = _unitOfWork.ChannelsRepository.GetConfig();
+            List<Channel> channels;
+            try
+            {
+                channels = _unitOfWork.ChannelsRepository.GetConfig();
+            }
+            catch(Exception e)
+            {
+                _logger.LogError("{date} - Error getting configuration: {exception}", DateTimeOffset.Now, e.Message);
+                return;
+            }
 
             while (!stoppingToken.IsCancellationRequested)
             {
                 Task task = Task.Run(() => _modbusService.StartWalkaround(channels, stoppingToken), stoppingToken); // execution time <=1000 
-                _logger.LogInformation("{date} - Walkaround start", DateTimeOffset.Now);
+                //_logger.LogInformation("{date} - Walkaround start", DateTimeOffset.Now);
 
                 await Task.WhenAll(task, Task.Delay(1000));
             }
