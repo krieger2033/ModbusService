@@ -33,9 +33,7 @@ namespace ModbusMaster.Service.Implemetations
 
             Parallel.ForEach(channels, currentChannel => {
 
-                Task task = new Task(() => ProcessChannel(currentChannel));
-
-                task.Start();
+                Task task = Task.Run(() => ProcessChannel(currentChannel), stoppingToken);
 
                 bool res = task.Wait(1000, stoppingToken);
 

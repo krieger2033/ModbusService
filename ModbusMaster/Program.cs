@@ -29,7 +29,7 @@ namespace ModbusMaster
                     IConfiguration config = hostContext.Configuration;
 
                     services.AddDbContext<ModbusDumpContext>(
-                        options => options.UseLazyLoadingProxies()
+                        options => options.UseLazyLoadingProxies() //заменить на ручной инклюд? (проблемы с подгрузкой дампов)
                                     .UseOracle(config.GetConnectionString("DefaultConnection")), 
                         ServiceLifetime.Transient, 
                         ServiceLifetime.Transient

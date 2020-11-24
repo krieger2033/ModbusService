@@ -22,11 +22,10 @@ namespace ModbusMaster
         {
             while (!stoppingToken.IsCancellationRequested)
             {
+                Task task = Task.Run(() => _modbusService.StartWalkaround(stoppingToken), stoppingToken); // execution time <=1000 
                 _logger.LogInformation("{date} - Walkaround start", DateTimeOffset.Now);
-                _modbusService.StartWalkaround(stoppingToken);
 
-                await Task.Delay(1000, stoppingToken); // опрос не чаще секунды
-                continue;
+                await Task.WhenAll(task, Task.Delay(1000));
             }
         }
     }
