@@ -7,6 +7,6 @@ namespace ModbusMaster.Service.Interfaces
 {
     public interface IModbusService
     {
-        void StartWalkaround(CancellationToken stoppingToken);
+        void StartWalkaround(IEnumerable<Channel> channels, CancellationToken stoppingToken);
     }
 }

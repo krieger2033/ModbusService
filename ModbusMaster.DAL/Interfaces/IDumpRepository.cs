@@ -10,5 +10,7 @@ namespace ModbusMaster.DAL.Interfaces
         void AddRegisterResult(Register register, bool[] result);
 
         void AddRegisterResult(Register register, ushort[] result);
+
+        int GetUnsavedChanges();
     }
 }

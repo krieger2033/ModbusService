@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
-
+using Microsoft.EntityFrameworkCore;
 using ModbusMaster.DAL.Interfaces;
 using ModbusMaster.Domain.Entities;
 
@@ -37,6 +38,16 @@ namespace ModbusMaster.DAL.Implementations
 
                 Insert(dump);
             }
+        }
+
+        public int GetUnsavedChanges()
+        {
+            var changes = _context.ChangeTracker.Entries<Dump>()
+                            .Where(x => x.State == EntityState.Added)
+                            .Select(y => y.Entity)
+                            .ToList();
+
+            return _context.Dumps.Local.Count;
         }
     }
 }

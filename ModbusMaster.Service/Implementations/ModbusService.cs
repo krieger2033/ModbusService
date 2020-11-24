@@ -27,15 +27,13 @@ namespace ModbusMaster.Service.Implemetations
             _logger = logger;
         }
 
-        public void StartWalkaround(CancellationToken stoppingToken)
+        public void StartWalkaround(IEnumerable<Channel> channels, CancellationToken stoppingToken)
         {
-            var channels = _unitOfWork.ChannelsRepository.GetAll();
-
             Parallel.ForEach(channels, currentChannel => {
 
                 Task task = Task.Run(() => ProcessChannel(currentChannel), stoppingToken);
 
-                bool res = task.Wait(1000, stoppingToken);
+                bool res = task.Wait(1000, stoppingToken); // timeout
 
                 _logger.LogInformation("{date} - Channel {num} " + (res ? "processed" : "timed out"), DateTimeOffset.Now, currentChannel.Id);
             });
@@ -45,7 +43,7 @@ namespace ModbusMaster.Service.Implemetations
 
         private void ProcessChannel(Channel channel)
         {
-            IModbusClient client = GetModbusClient(channel);
+            IModbusClient client = GetModbusClient(channel); // exception(?): wrong channel data
 
             foreach (Device device in channel.Devices)
             {
@@ -57,14 +55,14 @@ namespace ModbusMaster.Service.Implemetations
         private void ProcessDevice(IModbusClient client, Device device)
         {
             client.SetSlave(device);
-            client.Connect();
+            client.Connect(); // exception: device connection
 
             var dumpRepository = _unitOfWork.DumpsRepository;
 
             foreach (Register register in device.Registers)
             {
 
-                switch (register.Type)
+                switch (register.Type) // exception: connection gone away(?), exception: wrong registers data
                 {
                     case RegisterType.Coil:
                         dumpRepository.AddRegisterResult(register, client.ReadCoils(register.Offset, register.Count));

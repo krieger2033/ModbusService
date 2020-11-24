@@ -4,7 +4,7 @@ namespace ModbusMaster.DAL.Interfaces
 {
     public interface IUnitOfWork
     {
-        IRepository<Channel> ChannelsRepository { get; }
+        IChannelRepository ChannelsRepository { get; }
         IRepository<Device> DevicesRepository { get; }
         IRepository<Register> RegistersRepository { get; }
         IDumpRepository DumpsRepository { get; }

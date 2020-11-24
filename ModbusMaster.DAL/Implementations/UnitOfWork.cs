@@ -7,7 +7,7 @@ namespace ModbusMaster.DAL.Implementations
     {
         private readonly ModbusDumpContext _context;
 
-        public IRepository<Channel> ChannelsRepository => new Repository<Channel>(_context);
+        public IChannelRepository ChannelsRepository => new ChannelRepository(_context);
         public IRepository<Device> DevicesRepository => new Repository<Device>(_context);
         public IRepository<Register> RegistersRepository => new Repository<Register>(_context);
         public IDumpRepository DumpsRepository => new DumpRepository(_context);
