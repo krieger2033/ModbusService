@@ -1,9 +1,9 @@
-﻿using ModbusMaster.Domain.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using ModbusMaster.Domain.Entities;
 
-namespace ModbusMaster.DAL.Interfaces
+namespace ModbusMaster.PollAgent.DAL.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {

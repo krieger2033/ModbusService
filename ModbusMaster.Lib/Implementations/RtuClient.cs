@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.IO.Ports;
 using System.Threading.Tasks;
-
+using ModbusMaster.Domain.Entities;
+using ModbusMaster.PollAgent.Lib.Interfaces;
 using NModbus;
 using NModbus.Serial;
 
-using ModbusMaster.Lib.Interfaces;
-using ModbusMaster.Domain.Entities;
-
-namespace ModbusMaster.Lib.Implementations
+namespace ModbusMaster.PollAgent.Lib.Implementations
 {
     public class RtuClient : IRtuClient
     {

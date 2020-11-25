@@ -1,9 +1,8 @@
-﻿using ModbusMaster.Domain.Entities;
-using System.Collections.Generic;
-
+﻿using System.Collections.Generic;
 using System.Threading;
+using ModbusMaster.Domain.Entities;
 
-namespace ModbusMaster.Service.Interfaces
+namespace ModbusMaster.PollAgent.Services.Interfaces
 {
     public interface IModbusService
     {

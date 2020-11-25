@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.IO.Ports;
-
-using ModbusMaster.DAL.Interfaces;
-using ModbusMaster.Domain.Entities;
-using ModbusMaster.Service.Interfaces;
-using ModbusMaster.Lib.Interfaces;
-using ModbusMaster.Lib.Implementations;
 
 using Microsoft.Extensions.Logging;
 
-namespace ModbusMaster.Service.Implemetations
+using ModbusMaster.Domain.Entities;
+using ModbusMaster.PollAgent.DAL.Interfaces;
+using ModbusMaster.PollAgent.Lib.Implementations;
+using ModbusMaster.PollAgent.Lib.Interfaces;
+using ModbusMaster.PollAgent.Services.Interfaces;
+
+namespace ModbusMaster.PollAgent.Services.Implementations
 {
     public class ModbusService : IModbusService
     {
@@ -33,7 +31,7 @@ namespace ModbusMaster.Service.Implemetations
 
                 Task task = Task.Run(() => ProcessChannel(currentChannel), stoppingToken);
 
-                bool isTimedOut = task.Wait(1000, stoppingToken); // timeout
+                bool isTimedOut = task.Wait(1000, stoppingToken);
 
                 if(isTimedOut)
                 {

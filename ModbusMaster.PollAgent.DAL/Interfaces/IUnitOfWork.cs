@@ -1,6 +1,6 @@
 ﻿using ModbusMaster.Domain.Entities;
 
-namespace ModbusMaster.DAL.Interfaces
+namespace ModbusMaster.PollAgent.DAL.Interfaces
 {
     public interface IUnitOfWork
     {

@@ -1,4 +1,4 @@
-﻿namespace ModbusMaster.Lib.Implementations
+﻿namespace ModbusMaster.PollAgent.Lib.Implementations
 {
     public class TcpMasterData
     {

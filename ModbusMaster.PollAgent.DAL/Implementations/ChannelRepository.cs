@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Microsoft.EntityFrameworkCore;
-using ModbusMaster.DAL.Interfaces;
-using ModbusMaster.Domain.Entities;
 
-namespace ModbusMaster.DAL.Implementations
+using Microsoft.EntityFrameworkCore;
+
+using ModbusMaster.Domain.Entities;
+using ModbusMaster.DAL;
+using ModbusMaster.PollAgent.DAL.Interfaces;
+
+namespace ModbusMaster.PollAgent.DAL.Implementations
 {
     internal class ChannelRepository : Repository<Channel>, IChannelRepository
     {

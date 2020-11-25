@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Threading.Tasks;
-
+using ModbusMaster.Domain.Entities;
+using ModbusMaster.PollAgent.Lib.Interfaces;
 using NModbus;
 using NModbus.IO;
 
-using ModbusMaster.Lib.Interfaces;
-using ModbusMaster.Domain.Entities;
-
-namespace ModbusMaster.Lib.Implementations
+namespace ModbusMaster.PollAgent.Lib.Implementations
 {
     public class TcpClient : ITcpClient
     {

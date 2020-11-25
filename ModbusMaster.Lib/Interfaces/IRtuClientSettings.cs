@@ -1,6 +1,6 @@
-﻿using ModbusMaster.Lib.Implementations;
+﻿using ModbusMaster.PollAgent.Lib.Implementations;
 
-namespace ModbusMaster.Lib.Interfaces
+namespace ModbusMaster.PollAgent.Lib.Interfaces
 {
     public interface IRtuClientSettings
     {

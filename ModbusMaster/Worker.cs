@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using ModbusMaster.DAL.Interfaces;
+using ModbusMaster.PollAgent.DAL.Interfaces;
 using ModbusMaster.Domain.Entities;
-using ModbusMaster.Service.Interfaces;
+using ModbusMaster.PollAgent.Services.Interfaces;
 
-namespace ModbusMaster
+namespace ModbusMaster.PollAgent
 {
     public class Worker : BackgroundService
     {

@@ -1,6 +1,6 @@
 ﻿using ModbusMaster.Domain.Entities;
 
-namespace ModbusMaster.Lib.Implementations
+namespace ModbusMaster.PollAgent.Lib.Implementations
 {
     public class TcpSlaveData
     {

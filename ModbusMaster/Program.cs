@@ -1,19 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Proxies;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ModbusMaster.DAL;
-using ModbusMaster.DAL.Interfaces;
-using ModbusMaster.DAL.Implementations;
-using ModbusMaster.Service.Interfaces;
-using ModbusMaster.Service.Implemetations;
+using ModbusMaster.PollAgent.DAL.Implementations;
+using ModbusMaster.PollAgent.DAL.Interfaces;
+using ModbusMaster.PollAgent.Services.Implementations;
+using ModbusMaster.PollAgent.Services.Interfaces;
 
-namespace ModbusMaster
+namespace ModbusMaster.PollAgent
 {
     public class Program
     {
@@ -29,8 +24,7 @@ namespace ModbusMaster
                     IConfiguration config = hostContext.Configuration;
 
                     services.AddDbContext<ModbusDumpContext>(
-                        options => options//.UseLazyLoadingProxies()
-                                    .UseOracle(config.GetConnectionString("DefaultConnection")), 
+                        options => options.UseOracle(config.GetConnectionString("DefaultConnection")), 
                         ServiceLifetime.Transient, 
                         ServiceLifetime.Transient
                     );

@@ -1,12 +1,13 @@
-﻿using ModbusMaster.DAL.Interfaces;
-using ModbusMaster.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace ModbusMaster.DAL.Implementations
+using ModbusMaster.DAL;
+using ModbusMaster.Domain.Entities;
+using ModbusMaster.PollAgent.DAL.Interfaces;
+
+namespace ModbusMaster.PollAgent.DAL.Implementations
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {

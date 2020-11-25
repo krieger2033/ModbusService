@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Oracle.EntityFrameworkCore" Version="3.19.80" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModbusMaster.DAL\ModbusMaster.DAL.csproj" />
+    <ProjectReference Include="..\ModbusMaster.Domain\ModbusMaster.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

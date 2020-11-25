@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Threading.Tasks;
-
-
-namespace ModbusMaster.Lib.Interfaces
+﻿namespace ModbusMaster.PollAgent.Lib.Interfaces
 {
     public interface IRtuClient : IModbusClient, IRtuClientSettings
     {

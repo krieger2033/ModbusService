@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster", "ModbusMaster\ModbusMaster.csproj", "{E7DEF316-AA2B-46EC-949E-31EF2A792067}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.PollAgent", "ModbusMaster\ModbusMaster.PollAgent.csproj", "{E7DEF316-AA2B-46EC-949E-31EF2A792067}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EEF27018-1576-4B26-B5D9-D76B970A94F6} = {EEF27018-1576-4B26-B5D9-D76B970A94F6}
 	EndProjectSection
@@ -15,11 +15,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.DAL", "ModbusM
 		{570AA86C-FB11-44BC-ADDB-319CEEEB637A} = {570AA86C-FB11-44BC-ADDB-319CEEEB637A}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Service", "ModbusMaster.Service\ModbusMaster.Service.csproj", "{DE4354E1-BA80-4825-A4EC-610DEA38774E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.PollAgent.Services", "ModbusMaster.Service\ModbusMaster.PollAgent.Services.csproj", "{DE4354E1-BA80-4825-A4EC-610DEA38774E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378} = {323F4F70-19EE-4FA5-BBA2-0B17D70B2378}
+	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Lib", "ModbusMaster.Lib\ModbusMaster.Lib.csproj", "{B9DB50FC-1949-4E89-92D4-BA73B9ACD6A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.PollAgent.Lib", "ModbusMaster.Lib\ModbusMaster.PollAgent.Lib.csproj", "{B9DB50FC-1949-4E89-92D4-BA73B9ACD6A9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NModbus", "NModbus\NModbus.csproj", "{43C06704-D6CE-4675-BBA5-60D81B43DA7F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Api", "ModbusMaster.Api\ModbusMaster.Api.csproj", "{CD00811A-407A-4C70-87F5-97569A2F50DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusMaster.PollAgent.DAL", "ModbusMaster.PollAgent.DAL\ModbusMaster.PollAgent.DAL.csproj", "{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +106,30 @@ Global
 		{43C06704-D6CE-4675-BBA5-60D81B43DA7F}.Release|x64.Build.0 = Release|Any CPU
 		{43C06704-D6CE-4675-BBA5-60D81B43DA7F}.Release|x86.ActiveCfg = Release|Any CPU
 		{43C06704-D6CE-4675-BBA5-60D81B43DA7F}.Release|x86.Build.0 = Release|Any CPU
+		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Debug|x64.Build.0 = Debug|Any CPU
+		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Debug|x86.Build.0 = Debug|Any CPU
+		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Release|x64.ActiveCfg = Release|Any CPU
+		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Release|x64.Build.0 = Release|Any CPU
+		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Release|x86.ActiveCfg = Release|Any CPU
+		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Release|x86.Build.0 = Release|Any CPU
+		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Debug|x64.Build.0 = Debug|Any CPU
+		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Debug|x86.Build.0 = Debug|Any CPU
+		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Release|Any CPU.Build.0 = Release|Any CPU
+		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Release|x64.ActiveCfg = Release|Any CPU
+		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Release|x64.Build.0 = Release|Any CPU
+		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Release|x86.ActiveCfg = Release|Any CPU
+		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

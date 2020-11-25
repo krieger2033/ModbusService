@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Threading.Tasks;
-
+using ModbusMaster.Domain.Entities;
 using NModbus;
 
-using ModbusMaster.Domain.Entities;
-
-namespace ModbusMaster.Lib.Interfaces
+namespace ModbusMaster.PollAgent.Lib.Interfaces
 {
     public interface IModbusClient : IDisposable
     {
