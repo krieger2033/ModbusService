@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ModbusMaster.Api.Domain\ModbusMaster.Api.Domain.csproj" />
     <ProjectReference Include="..\ModbusMaster.Domain\ModbusMaster.Domain.csproj" />
   </ItemGroup>
 

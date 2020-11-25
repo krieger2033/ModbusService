@@ -5,7 +5,7 @@ namespace ModbusMaster.DAL
 {
     public static class DBSeeder
     {
-        public static void Seed(this ModelBuilder modelBuilder)
+        public static void SeedPollAgent(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Channel>().HasData
             (
@@ -55,6 +55,11 @@ namespace ModbusMaster.DAL
                     Count = 3,
                 }
             );
+        }
+
+        public static void SeedApi(this ModelBuilder modelBuilder)
+        {
+
         }
     }
 }

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModbusMaster.Api.DAL\ModbusMaster.Api.DAL.csproj" />
+    <ProjectReference Include="..\ModbusMaster.Api.Services\ModbusMaster.Api.Services.csproj" />
+    <ProjectReference Include="..\ModbusMaster.DAL\ModbusMaster.DAL.csproj" />
+  </ItemGroup>
+
+
+</Project>
