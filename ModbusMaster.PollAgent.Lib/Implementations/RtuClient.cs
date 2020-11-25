@@ -13,7 +13,7 @@ namespace ModbusMaster.PollAgent.Lib.Implementations
         #region Private Data Members
 
         private SerialPort _serialport;
-        private ModbusFactory _factory;
+        private readonly ModbusFactory _factory;
         private IModbusMaster _modbus;
 
         #endregion

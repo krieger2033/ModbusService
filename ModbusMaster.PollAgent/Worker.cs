@@ -43,7 +43,7 @@ namespace ModbusMaster.PollAgent
                 Task task = Task.Run(() => _modbusService.StartWalkaround(channels, stoppingToken), stoppingToken); // execution time <=1000 
                 //_logger.LogInformation("{date} - Walkaround start", DateTimeOffset.Now);
 
-                await Task.WhenAll(task, Task.Delay(1000));
+                await Task.WhenAll(task, Task.Delay(1000, stoppingToken));
             }
         }
     }

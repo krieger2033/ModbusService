@@ -12,7 +12,7 @@ namespace ModbusMaster.PollAgent.Lib.Implementations
         #region Private Data Members
 
         private System.Net.Sockets.TcpClient _client;
-        private ModbusFactory _factory;
+        private readonly ModbusFactory _factory;
         private IModbusMaster _modbus;
 
         #endregion

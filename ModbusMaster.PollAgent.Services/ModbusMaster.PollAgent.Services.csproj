@@ -7,7 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ModbusMaster.DAL\ModbusMaster.DAL.csproj" />
     <ProjectReference Include="..\ModbusMaster.Domain\ModbusMaster.Domain.csproj" />
-    <ProjectReference Include="..\ModbusMaster.Lib\ModbusMaster.PollAgent.Lib.csproj" />
+    <ProjectReference Include="..\ModbusMaster.PollAgent.Lib\ModbusMaster.PollAgent.Lib.csproj" />
     <ProjectReference Include="..\ModbusMaster.PollAgent.DAL\ModbusMaster.PollAgent.DAL.csproj" />
   </ItemGroup>
 
