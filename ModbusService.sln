@@ -24,20 +24,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.PollAgent.Lib"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NModbus", "NModbus\NModbus.csproj", "{43C06704-D6CE-4675-BBA5-60D81B43DA7F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Api", "ModbusMaster.Api\ModbusMaster.Api.csproj", "{CD00811A-407A-4C70-87F5-97569A2F50DD}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.PollAgent.DAL", "ModbusMaster.PollAgent.DAL\ModbusMaster.PollAgent.DAL.csproj", "{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusMaster.Api.Domain", "ModbusMaster.Api.Domain\ModbusMaster.Api.Domain.csproj", "{069639B1-DBAC-4608-BD1D-3ACAE253069D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Client.Domain", "ModbusMaster.Client.Domain\ModbusMaster.Client.Domain.csproj", "{069639B1-DBAC-4608-BD1D-3ACAE253069D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusMaster.Api.DAL", "ModbusMaster.Api.DAL\ModbusMaster.Api.DAL.csproj", "{9C23F671-4F92-4A5E-B21A-DFC507599E88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Client.DAL", "ModbusMaster.Client.DAL\ModbusMaster.Client.DAL.csproj", "{9C23F671-4F92-4A5E-B21A-DFC507599E88}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EEF27018-1576-4B26-B5D9-D76B970A94F6} = {EEF27018-1576-4B26-B5D9-D76B970A94F6}
 		{570AA86C-FB11-44BC-ADDB-319CEEEB637A} = {570AA86C-FB11-44BC-ADDB-319CEEEB637A}
 		{069639B1-DBAC-4608-BD1D-3ACAE253069D} = {069639B1-DBAC-4608-BD1D-3ACAE253069D}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusMaster.Api.Services", "ModbusMaster.Api.Services\ModbusMaster.Api.Services.csproj", "{1C543F85-4E21-4F02-B855-E56D7515AA8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Client.Services", "ModbusMaster.Client.Services\ModbusMaster.Client.Services.csproj", "{1C543F85-4E21-4F02-B855-E56D7515AA8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusMaster.Client", "ModbusMaster.Client\ModbusMaster.Client.csproj", "{CDB86C8F-E6D3-484E-87D7-AAC87551C994}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,18 +117,6 @@ Global
 		{43C06704-D6CE-4675-BBA5-60D81B43DA7F}.Release|x64.Build.0 = Release|Any CPU
 		{43C06704-D6CE-4675-BBA5-60D81B43DA7F}.Release|x86.ActiveCfg = Release|Any CPU
 		{43C06704-D6CE-4675-BBA5-60D81B43DA7F}.Release|x86.Build.0 = Release|Any CPU
-		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Debug|x64.Build.0 = Debug|Any CPU
-		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Debug|x86.Build.0 = Debug|Any CPU
-		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Release|x64.ActiveCfg = Release|Any CPU
-		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Release|x64.Build.0 = Release|Any CPU
-		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Release|x86.ActiveCfg = Release|Any CPU
-		{CD00811A-407A-4C70-87F5-97569A2F50DD}.Release|x86.Build.0 = Release|Any CPU
 		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{323F4F70-19EE-4FA5-BBA2-0B17D70B2378}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -177,6 +165,18 @@ Global
 		{1C543F85-4E21-4F02-B855-E56D7515AA8A}.Release|x64.Build.0 = Release|Any CPU
 		{1C543F85-4E21-4F02-B855-E56D7515AA8A}.Release|x86.ActiveCfg = Release|Any CPU
 		{1C543F85-4E21-4F02-B855-E56D7515AA8A}.Release|x86.Build.0 = Release|Any CPU
+		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Debug|x64.Build.0 = Debug|Any CPU
+		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Debug|x86.Build.0 = Debug|Any CPU
+		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Release|x64.ActiveCfg = Release|Any CPU
+		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Release|x64.Build.0 = Release|Any CPU
+		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Release|x86.ActiveCfg = Release|Any CPU
+		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

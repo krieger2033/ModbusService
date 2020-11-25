@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ModbusMaster.Api.DAL\ModbusMaster.Api.DAL.csproj" />
-    <ProjectReference Include="..\ModbusMaster.Api.Services\ModbusMaster.Api.Services.csproj" />
+    <ProjectReference Include="..\ModbusMaster.Client.DAL\ModbusMaster.Client.DAL.csproj" />
+    <ProjectReference Include="..\ModbusMaster.Client.Services\ModbusMaster.Client.Services.csproj" />
     <ProjectReference Include="..\ModbusMaster.DAL\ModbusMaster.DAL.csproj" />
   </ItemGroup>
 

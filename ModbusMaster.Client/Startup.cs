@@ -6,38 +6,38 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 
 using ModbusMaster.DAL;
 using ModbusMaster.Client.DAL.Interfaces;
+using ModbusMaster.Client.DAL.Implementations;
 using ModbusMaster.Client.Services.Interfaces;
+using ModbusMaster.Client.Services.Implementations;
 
-namespace ModbusMaster.Api
+namespace ModbusMaster.Client
 {
     public class Startup
     {
-        private readonly IConfiguration _configuration;
-
         public Startup(IConfiguration configuration)
         {
-            _configuration = configuration;
+            Configuration = configuration;
         }
+
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApiDataContext>(options => options.UseOracle(_configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApiDataContext>(options => options.UseOracle(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IUnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddScoped<IUsersService>();
+            services.AddScoped<IUsersService, UsersService>();
 
-            services.AddControllers();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,8 +47,14 @@ namespace ModbusMaster.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -56,7 +62,9 @@ namespace ModbusMaster.Api
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

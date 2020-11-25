@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModbusMaster.Client.DAL\ModbusMaster.Client.DAL.csproj" />
+    <ProjectReference Include="..\ModbusMaster.Client.Domain\ModbusMaster.Client.Domain.csproj" />
+    <ProjectReference Include="..\ModbusMaster.DAL\ModbusMaster.DAL.csproj" />
+    <ProjectReference Include="..\ModbusMaster.Domain\ModbusMaster.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
