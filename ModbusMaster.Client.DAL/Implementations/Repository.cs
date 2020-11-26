@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using ModbusMaster.Client.DAL.Interfaces;
 using ModbusMaster.DAL;
 using ModbusMaster.Domain.Entities;
@@ -10,39 +12,39 @@ namespace ModbusMaster.Client.DAL.Implementations
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        protected ApiDataContext _context;
+        protected DbContext _context;
 
-        public Repository(ApiDataContext context)
+        public Repository(DbContext context)
         {
             _context = context;
         }
 
-        public virtual T Get(int id)
+        public Task<T> Get(int id)
         {
-            return _context.Set<T>().Single(s => s.Id == id);
+            return _context.Set<T>().SingleAsync(s => s.Id == id);
         }
 
-        public virtual T GetSingle(Expression<Func<T, bool>> predicate)
+        public Task<T> GetSingle(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().SingleOrDefault(predicate);
+            return _context.Set<T>().SingleOrDefaultAsync(predicate);
         }
 
-        public virtual List<T> GetAll()
+        public Task<List<T>> GetAll()
         {
-            return _context.Set<T>().ToList();
+            return _context.Set<T>().ToListAsync();
         }
 
-        public virtual List<T> Find(Expression<Func<T, bool>> predicate)
+        public Task<List<T>> Find(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().Where(predicate).ToList();
+            return _context.Set<T>().Where(predicate).ToListAsync();
         }
 
-        public virtual void Insert(T entity)
+        public void Insert(T entity)
         {
             _context.Set<T>().Add(entity);
         }
 
-        public virtual void Delete(T entity)
+        public void Delete(T entity)
         {
             _context.Set<T>().Remove(entity);
         }

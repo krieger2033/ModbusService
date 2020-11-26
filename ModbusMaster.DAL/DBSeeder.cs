@@ -1,5 +1,5 @@
-﻿using ModbusMaster.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using ModbusMaster.Domain.Entities;
 
 namespace ModbusMaster.DAL
 {

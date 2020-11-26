@@ -4,16 +4,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.PollAgent", "ModbusMaster.PollAgent\ModbusMaster.PollAgent.csproj", "{E7DEF316-AA2B-46EC-949E-31EF2A792067}"
-	ProjectSection(ProjectDependencies) = postProject
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6} = {EEF27018-1576-4B26-B5D9-D76B970A94F6}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Domain", "ModbusMaster.Domain\ModbusMaster.Domain.csproj", "{570AA86C-FB11-44BC-ADDB-319CEEEB637A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.DAL", "ModbusMaster.DAL\ModbusMaster.DAL.csproj", "{EEF27018-1576-4B26-B5D9-D76B970A94F6}"
-	ProjectSection(ProjectDependencies) = postProject
-		{570AA86C-FB11-44BC-ADDB-319CEEEB637A} = {570AA86C-FB11-44BC-ADDB-319CEEEB637A}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.PollAgent.Services", "ModbusMaster.PollAgent.Services\ModbusMaster.PollAgent.Services.csproj", "{DE4354E1-BA80-4825-A4EC-610DEA38774E}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -30,14 +22,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Client.Domain"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Client.DAL", "ModbusMaster.Client.DAL\ModbusMaster.Client.DAL.csproj", "{9C23F671-4F92-4A5E-B21A-DFC507599E88}"
 	ProjectSection(ProjectDependencies) = postProject
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6} = {EEF27018-1576-4B26-B5D9-D76B970A94F6}
 		{570AA86C-FB11-44BC-ADDB-319CEEEB637A} = {570AA86C-FB11-44BC-ADDB-319CEEEB637A}
 		{069639B1-DBAC-4608-BD1D-3ACAE253069D} = {069639B1-DBAC-4608-BD1D-3ACAE253069D}
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Client.Services", "ModbusMaster.Client.Services\ModbusMaster.Client.Services.csproj", "{1C543F85-4E21-4F02-B855-E56D7515AA8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModbusMaster.Client", "ModbusMaster.Client\ModbusMaster.Client.csproj", "{CDB86C8F-E6D3-484E-87D7-AAC87551C994}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Client", "ModbusMaster.Client\ModbusMaster.Client.csproj", "{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.DAL", "ModbusMaster.DAL\ModbusMaster.DAL.csproj", "{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{570AA86C-FB11-44BC-ADDB-319CEEEB637A} = {570AA86C-FB11-44BC-ADDB-319CEEEB637A}
+		{069639B1-DBAC-4608-BD1D-3ACAE253069D} = {069639B1-DBAC-4608-BD1D-3ACAE253069D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,18 +66,6 @@ Global
 		{570AA86C-FB11-44BC-ADDB-319CEEEB637A}.Release|x64.Build.0 = Release|Any CPU
 		{570AA86C-FB11-44BC-ADDB-319CEEEB637A}.Release|x86.ActiveCfg = Release|Any CPU
 		{570AA86C-FB11-44BC-ADDB-319CEEEB637A}.Release|x86.Build.0 = Release|Any CPU
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6}.Debug|x64.Build.0 = Debug|Any CPU
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6}.Debug|x86.Build.0 = Debug|Any CPU
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6}.Release|x64.ActiveCfg = Release|Any CPU
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6}.Release|x64.Build.0 = Release|Any CPU
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6}.Release|x86.ActiveCfg = Release|Any CPU
-		{EEF27018-1576-4B26-B5D9-D76B970A94F6}.Release|x86.Build.0 = Release|Any CPU
 		{DE4354E1-BA80-4825-A4EC-610DEA38774E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DE4354E1-BA80-4825-A4EC-610DEA38774E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE4354E1-BA80-4825-A4EC-610DEA38774E}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -165,18 +150,30 @@ Global
 		{1C543F85-4E21-4F02-B855-E56D7515AA8A}.Release|x64.Build.0 = Release|Any CPU
 		{1C543F85-4E21-4F02-B855-E56D7515AA8A}.Release|x86.ActiveCfg = Release|Any CPU
 		{1C543F85-4E21-4F02-B855-E56D7515AA8A}.Release|x86.Build.0 = Release|Any CPU
-		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Debug|x64.Build.0 = Debug|Any CPU
-		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Debug|x86.Build.0 = Debug|Any CPU
-		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Release|x64.ActiveCfg = Release|Any CPU
-		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Release|x64.Build.0 = Release|Any CPU
-		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Release|x86.ActiveCfg = Release|Any CPU
-		{CDB86C8F-E6D3-484E-87D7-AAC87551C994}.Release|x86.Build.0 = Release|Any CPU
+		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Debug|x64.Build.0 = Debug|Any CPU
+		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Debug|x86.Build.0 = Debug|Any CPU
+		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Release|x64.ActiveCfg = Release|Any CPU
+		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Release|x64.Build.0 = Release|Any CPU
+		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Release|x86.ActiveCfg = Release|Any CPU
+		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Release|x86.Build.0 = Release|Any CPU
+		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Debug|x64.Build.0 = Debug|Any CPU
+		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Debug|x86.Build.0 = Debug|Any CPU
+		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Release|x64.ActiveCfg = Release|Any CPU
+		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Release|x64.Build.0 = Release|Any CPU
+		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Release|x86.ActiveCfg = Release|Any CPU
+		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

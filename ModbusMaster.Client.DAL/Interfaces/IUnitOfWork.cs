@@ -1,6 +1,4 @@
-﻿using ModbusMaster.Client.Domain.Entities;
-
-//using ModbusMaster.Api.Domain.Entities;
+﻿//using ModbusMaster.Client.Domain.Entities;
 
 namespace ModbusMaster.Client.DAL.Interfaces
 {
@@ -10,7 +8,6 @@ namespace ModbusMaster.Client.DAL.Interfaces
         //IRepository<Device> DevicesRepository { get; }
         //IRepository<Register> RegistersRepository { get; }
         //IRepository<Dump> DumpsRepository { get; }
-        IRepository<AppUser> UsersRepository { get; }
 
         int SaveChanges();
     }

@@ -8,4 +8,8 @@
     <ProjectReference Include="..\ModbusMaster.Domain\ModbusMaster.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Entities\" />
+  </ItemGroup>
+
 </Project>
