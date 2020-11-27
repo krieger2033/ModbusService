@@ -1,0 +1,49 @@
+﻿@using System.Linq
+@model ModbusMaster.Client.Models.User.UserListViewModel
+
+@{
+    ViewData["Title"] = "ReadAll";
+}
+
+<h2>Users list</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@if (!Model.UserIndexViewModels.Any())
+{
+    <h3>There are no users</h3>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label asp-for="@Model.UserIndexViewModels.First().Username"></label>
+            </th>
+            <th>
+                <label asp-for="@Model.UserIndexViewModels.First().Role"></label>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var user in Model.UserIndexViewModels)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => user.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => user.Role)
+                </td>
+                <td>
+                    <a asp-action="RemoveGame" asp-route-key="@user.Username">Remove</a> |
+                    <a asp-action="Edit" asp-route-key="@user.Username">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

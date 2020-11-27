@@ -5,7 +5,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ModbusMaster.DAL; //using ModbusMaster.DAL;
+using ModbusMaster.Client.DAL.Implementations;
+using ModbusMaster.Client.DAL.Interfaces;
+using ModbusMaster.Client.Domain.Entities;
+using ModbusMaster.Client.Factories.User;
+using ModbusMaster.Client.Services.Implementations;
+using ModbusMaster.Client.Services.Interfaces;
+using ModbusMaster.DAL;
 
 namespace ModbusMaster.Client
 {
@@ -25,8 +31,14 @@ namespace ModbusMaster.Client
                 options.UseOracle(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ModbusIdentityContext>();
+
+            services.AddScoped<IUserService, UserService>();
+
+            services.AddScoped<IUserFactory, UserFactory>();
+
+            //services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
@@ -53,6 +65,14 @@ namespace ModbusMaster.Client
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                var roleManager = serviceScope.ServiceProvider.GetService<RoleManager<ApplicationRole>>();
+                var userManager = serviceScope.ServiceProvider.GetService<UserManager<ApplicationUser>>();
+
+                IdentityInitializer.SeedData(userManager, roleManager);
+            }
 
             app.UseEndpoints(endpoints =>
             {
