@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Oracle.EntityFrameworkCore.Metadata;
 
-namespace ModbusMaster.DAL.Migrations.Identity
+namespace ModbusMaster.DAL.Migrations.Client
 {
-    public partial class Initial : Migration
+    public partial class IdentityInit : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -93,8 +93,8 @@ namespace ModbusMaster.DAL.Migrations.Identity
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
                     ProviderDisplayName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: false)
                 },
@@ -138,8 +138,8 @@ namespace ModbusMaster.DAL.Migrations.Identity
                 columns: table => new
                 {
                     UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(maxLength: 128, nullable: false),
-                    Name = table.Column<string>(maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     Value = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -149,6 +149,102 @@ namespace ModbusMaster.DAL.Migrations.Identity
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Channels",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn),
+                    Type = table.Column<int>(nullable: false),
+                    ComPort = table.Column<string>(nullable: true),
+                    Baudrate = table.Column<int>(nullable: true),
+                    Parity = table.Column<int>(nullable: true),
+                    StopBits = table.Column<int>(nullable: true),
+                    Title = table.Column<string>(nullable: false),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Channels", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Channels_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Devices",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn),
+                    Type = table.Column<int>(nullable: false),
+                    ChannelId = table.Column<int>(nullable: false),
+                    Ip = table.Column<string>(nullable: true),
+                    Port = table.Column<int>(nullable: true),
+                    Identificator = table.Column<byte>(nullable: true),
+                    Title = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Devices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Devices_Channels_ChannelId",
+                        column: x => x.ChannelId,
+                        principalTable: "Channels",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Dumps",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn),
+                    DeviceId = table.Column<int>(nullable: false),
+                    RegisterType = table.Column<int>(nullable: false),
+                    Offset = table.Column<int>(nullable: false),
+                    Data = table.Column<int>(nullable: true),
+                    Date = table.Column<DateTimeOffset>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Dumps", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Dumps_Devices_DeviceId",
+                        column: x => x.DeviceId,
+                        principalTable: "Devices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Registers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Oracle:ValueGenerationStrategy", OracleValueGenerationStrategy.IdentityColumn),
+                    DeviceId = table.Column<int>(nullable: false),
+                    Type = table.Column<int>(nullable: false),
+                    Offset = table.Column<int>(nullable: false),
+                    Count = table.Column<int>(nullable: false),
+                    Formula = table.Column<string>(nullable: true),
+                    Title = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Registers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Registers_Devices_DeviceId",
+                        column: x => x.DeviceId,
+                        principalTable: "Devices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -189,6 +285,44 @@ namespace ModbusMaster.DAL.Migrations.Identity
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Channels_UserId",
+                table: "Channels",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Channels_Title_UserId",
+                table: "Channels",
+                columns: new[] { "Title", "UserId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Devices_ChannelId",
+                table: "Devices",
+                column: "ChannelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Devices_Title",
+                table: "Devices",
+                column: "Title",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Dumps_DeviceId",
+                table: "Dumps",
+                column: "DeviceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Registers_DeviceId",
+                table: "Registers",
+                column: "DeviceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Registers_Title",
+                table: "Registers",
+                column: "Title",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -209,7 +343,19 @@ namespace ModbusMaster.DAL.Migrations.Identity
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Dumps");
+
+            migrationBuilder.DropTable(
+                name: "Registers");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Devices");
+
+            migrationBuilder.DropTable(
+                name: "Channels");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

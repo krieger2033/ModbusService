@@ -17,7 +17,7 @@ namespace ModbusMaster.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.SeedPollAgent();
+            //modelBuilder.SeedPollAgent();
         }
     }
 }

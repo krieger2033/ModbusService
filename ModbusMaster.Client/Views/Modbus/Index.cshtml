@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "Modbus Config";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            LoadConfig();
+            LoadChannelCreateForm();
+
+            $("body").on("change", "#ModbusType", function () { LoadChannelCreateForm($(this).val()) });
+        });
+
+        function LoadConfig()
+        {
+            $("#_ListPartial").load("@Url.Action("GetConfig")");
+        }
+
+        function LoadChannelCreateForm(type = 0)
+        {
+            $("#_FormPartial").load("@Url.Action("ChannelCreate")", "type=" + type);
+        }
+    </script>
+}
+
+<div class="row">
+    <div class="col-md-4" id="_ListPartial">
+        
+    </div>
+    <div class="col-md-5 offset-2" id="_FormPartial">
+        
+    </div>
+</div>

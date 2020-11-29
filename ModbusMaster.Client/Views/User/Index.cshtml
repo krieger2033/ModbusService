@@ -2,10 +2,10 @@
 @model ModbusMaster.Client.Models.User.UserListViewModel
 
 @{
-    ViewData["Title"] = "ReadAll";
+    ViewData["Title"] = "Users";
 }
 
-<h2>Users list</h2>
+<h1>@ViewData["Title"]</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -15,9 +15,10 @@
 {
     <h3>There are no users</h3>
 }
-
-<table class="table">
-    <thead>
+else
+{
+    <table class="table table-striped table-hover">
+        <thead>
         <tr>
             <th>
                 <label asp-for="@Model.UserIndexViewModels.First().Username"></label>
@@ -27,8 +28,8 @@
             </th>
             <th></th>
         </tr>
-    </thead>
-    <tbody>
+        </thead>
+        <tbody>
 
         @foreach (var user in Model.UserIndexViewModels)
         {
@@ -40,10 +41,10 @@
                     @Html.DisplayFor(model => user.Role)
                 </td>
                 <td>
-                    <a asp-action="RemoveGame" asp-route-key="@user.Username">Remove</a> |
-                    <a asp-action="Edit" asp-route-key="@user.Username">Edit</a>
+                    <a asp-action="Remove" asp-route-key="@user.Username">Remove</a>
                 </td>
             </tr>
         }
-    </tbody>
-</table>
+        </tbody>
+    </table>
+}

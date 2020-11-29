@@ -1,0 +1,41 @@
+﻿@using ModbusMaster.Domain.Entities
+@model ModbusMaster.Client.Models.Modbus.ChannelsListViewModel
+
+<script src="~/js/bootstrap.tree.js"></script>
+<script>TreeViewInit();</script>
+
+<div class="tree">
+    <ul>
+        @foreach (var channel in Model.ChannelIndexViewModels)
+        {
+            <li>
+                <span>@channel.Title</span> <a asp-action="Edit">Edit</a>
+                <ul>
+                    @foreach (var device in channel.DevicesListViewModel.DeviceIndexViewModels)
+                    {
+                        <li>
+                            <span>@device.Title</span> <a asp-action="Edit">Edit</a>
+                            <ul>
+                                @foreach (var register in device.RegistersListViewModel.RegisterIndexViewModels)
+                                {
+                                    <li>
+                                        <span>@register.Title</span> <a asp-action="Edit">Edit</a>
+                                    </li>
+                                }
+                                <li>
+                                    <a asp-action="Create"><span>Create register group</span></a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    <li>
+                        <a asp-action="Create"><span>Create device</span></a>
+                    </li>
+                </ul>
+            </li>
+        }
+        <li>
+            <a href="#" onclick="LoadChannelCreateForm()"><span>Create channel</span></a>
+        </li>
+    </ul>
+</div>

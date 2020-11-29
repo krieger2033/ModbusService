@@ -7,14 +7,10 @@ using ModbusMaster.Client.Domain.Entities;
 
 namespace ModbusMaster.Client.Services.Interfaces
 {
-    public interface IUserService
+    public interface IModbusService
     {
-        Task<ApplicationUser> GetUser(string login);
+        Task<List<ChannelConfig>> GetModbusConfig();
 
-        Task<List<ApplicationUser>> ReadAll();
-
-        Task<bool> Add(ApplicationUser user);
-
-        Task Remove(ApplicationUser user);
+        Task Create(ChannelConfig channel);
     }
 }

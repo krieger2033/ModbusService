@@ -22,7 +22,7 @@ namespace ModbusMaster.Domain.Entities
 
     public enum ChannelType
     {
-        ModbusTCP,
+        Tcp,
         SerialPort
     }
 }

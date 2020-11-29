@@ -5,13 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
+using ModbusMaster.DAL;
 using ModbusMaster.Client.DAL.Implementations;
 using ModbusMaster.Client.DAL.Interfaces;
 using ModbusMaster.Client.Domain.Entities;
 using ModbusMaster.Client.Factories.User;
+using ModbusMaster.Client.Factories.Modbus;
 using ModbusMaster.Client.Services.Implementations;
 using ModbusMaster.Client.Services.Interfaces;
-using ModbusMaster.DAL;
 
 namespace ModbusMaster.Client
 {
@@ -27,18 +29,19 @@ namespace ModbusMaster.Client
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ModbusIdentityContext>(options =>
-                options.UseOracle(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ModbusClientContext>(options =>
+                options.UseOracle(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ModbusIdentityContext>();
+                .AddEntityFrameworkStores<ModbusClientContext>();
 
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IModbusService, ModbusService>();
 
             services.AddScoped<IUserFactory, UserFactory>();
+            services.AddScoped<IModbusFactory, ModbusFactory>();
 
-            //services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

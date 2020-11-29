@@ -19,4 +19,9 @@
     <ProjectReference Include="..\ModbusMaster.Domain\ModbusMaster.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\Data\" />
+    <Folder Include="Migrations\Client\" />
+  </ItemGroup>
+
 </Project>

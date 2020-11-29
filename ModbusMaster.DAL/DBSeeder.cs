@@ -13,7 +13,7 @@ namespace ModbusMaster.DAL
                 new Channel()
                 {
                     Id = 1,
-                    Type = ChannelType.ModbusTCP,
+                    Type = ChannelType.Tcp,
                 }
             );
 

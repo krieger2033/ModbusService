@@ -114,7 +114,7 @@ namespace ModbusMaster.PollAgent.Services.Implementations
         {
             switch(channel.Type)
             {
-                case ChannelType.ModbusTCP: return new TcpClient();
+                case ChannelType.Tcp: return new TcpClient();
                 case ChannelType.SerialPort: 
                     return new RtuClient() 
                     {
