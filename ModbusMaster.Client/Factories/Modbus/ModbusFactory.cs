@@ -126,5 +126,67 @@ namespace ModbusMaster.Client.Factories.Modbus
                 StopBits = model.StopBits
             };
         }
+
+        public async Task<TcpDeviceCreateViewModel> GetTcpDeviceCreateViewModel(int channelId)
+        {
+            return new TcpDeviceCreateViewModel()
+            {
+                ChannelId = channelId,
+                ChannelTitle = await _modbusService.GetChannelTitle(channelId)
+            };
+        }
+
+        public async Task<RtuDeviceCreateViewModel> GetRtuDeviceCreateViewModel(int channelId)
+        {
+            return new RtuDeviceCreateViewModel()
+            {
+                ChannelId = channelId,
+                ChannelTitle = await _modbusService.GetChannelTitle(channelId)
+            };
+        }
+
+        public DeviceConfig GetDevice(TcpDeviceCreateViewModel model)
+        {
+            return new DeviceConfig()
+            {
+                ChannelId = model.ChannelId,
+                Title = model.Title,
+                Type = model.Type,
+                Ip = model.Ip,
+                Port = model.Port
+            };
+        }
+
+        public DeviceConfig GetDevice(RtuDeviceCreateViewModel model)
+        {
+            return new DeviceConfig()
+            {
+                ChannelId = model.ChannelId,
+                Title = model.Title,
+                Type = model.Type,
+                Identificator = model.Identificator
+            };
+        }
+
+        public async Task<RegisterCreateViewModel> GetRegisterCreateViewModel(int deviceId)
+        {
+            return new RegisterCreateViewModel()
+            {
+                DeviceId = deviceId,
+                DeviceTitle = await _modbusService.GetDeviceTitle(deviceId)
+            };
+        }
+
+        public RegisterConfig GetRegister(RegisterCreateViewModel model)
+        {
+            return new RegisterConfig()
+            {
+                DeviceId = model.DeviceId,
+                Title = model.Title,
+                Type = model.Type,
+                Offset = model.Offset,
+                Count = model.Count
+            };
+        }
     }
 }

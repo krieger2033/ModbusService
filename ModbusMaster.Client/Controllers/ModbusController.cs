@@ -25,14 +25,14 @@ namespace ModbusMaster.Client.Controllers
         }
 
         // GET: ModbusController
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return View();
         }
 
         public async Task<IActionResult> GetConfig()
         {
-            return PartialView("_ModbusConfigPartial", _modbusFactory.GetChannelsListViewModel().Result);
+            return PartialView("_ModbusConfigPartial", await _modbusFactory.GetChannelsListViewModel());
         }
 
         public IActionResult ChannelCreate(ChannelType type = ChannelType.Tcp)
@@ -72,6 +72,86 @@ namespace ModbusMaster.Client.Controllers
 
             return PartialView("_SerialChannelCreatePartial", model);
         }
+
+        public async Task<IActionResult> ChannelRemove(int id)
+        {
+            await _modbusService.Remove(await _modbusService.GetChannelById(id));
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> DeviceCreate(int channelId, DeviceType type = DeviceType.ModbusRTU)
+        {
+            //TODO: channel existence check; channel\device type constraint
+
+            if (type == DeviceType.ModbusTCP)
+            {
+                return PartialView("_TcpDeviceCreatePartial", await _modbusFactory.GetTcpDeviceCreateViewModel(channelId));
+            }
+
+            return PartialView("_RtuDeviceCreatePartial", await _modbusFactory.GetRtuDeviceCreateViewModel(channelId));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TcpDeviceCreate(TcpDeviceCreateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _modbusService.Create(_modbusFactory.GetDevice(model));
+                return PartialView("_TcpChannelCreatePartial", _modbusFactory.GetTcpChannelCreateViewModel());
+            }
+
+            return PartialView("_TcpDeviceCreatePartial", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RtuDeviceCreate(RtuDeviceCreateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _modbusService.Create(_modbusFactory.GetDevice(model));
+                return PartialView("_TcpChannelCreatePartial", _modbusFactory.GetTcpChannelCreateViewModel());
+            }
+
+            return PartialView("_RtuDeviceCreatePartial", model);
+        }
+
+        public async Task<IActionResult> DeviceRemove(int id)
+        {
+            await _modbusService.Remove(await _modbusService.GetDeviceById(id));
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> RegisterCreate(int deviceId)
+        {
+            //TODO: device existence check
+
+            return PartialView("_RegisterCreatePartial", await _modbusFactory.GetRegisterCreateViewModel(deviceId));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterCreate(RegisterCreateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _modbusService.Create(_modbusFactory.GetRegister(model));
+                return PartialView("_TcpChannelCreatePartial", _modbusFactory.GetTcpChannelCreateViewModel());
+            }
+
+            return PartialView("_RegisterCreatePartial", model);
+        }
+
+        public async Task<IActionResult> RegisterRemove(int id)
+        {
+            await _modbusService.Remove(await _modbusService.GetRegisterById(id));
+
+            return RedirectToAction(nameof(Index));
+        }
+
 
         // GET: ModbusController/Edit/5
         public ActionResult Edit(int id)

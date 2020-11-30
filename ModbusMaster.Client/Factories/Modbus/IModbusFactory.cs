@@ -15,5 +15,17 @@ namespace ModbusMaster.Client.Factories.Modbus
         ChannelConfig GetChannel(TcpChannelCreateViewModel model);
 
         ChannelConfig GetChannel(SerialChannelCreateViewModel model);
+
+        Task<TcpDeviceCreateViewModel> GetTcpDeviceCreateViewModel(int channelId);
+
+        Task<RtuDeviceCreateViewModel> GetRtuDeviceCreateViewModel(int channelId);
+
+        DeviceConfig GetDevice(TcpDeviceCreateViewModel model);
+
+        DeviceConfig GetDevice(RtuDeviceCreateViewModel model);
+
+        Task<RegisterCreateViewModel> GetRegisterCreateViewModel(int deviceId);
+
+        RegisterConfig GetRegister(RegisterCreateViewModel model);
     }
 }

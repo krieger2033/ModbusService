@@ -9,8 +9,28 @@ namespace ModbusMaster.Client.Services.Interfaces
 {
     public interface IModbusService
     {
+        Task<string> GetChannelTitle(int channelId);
+
+        Task<string> GetDeviceTitle(int deviceId);
+
+        Task<ChannelConfig> GetChannelById(int id);
+
+        Task<DeviceConfig> GetDeviceById(int id);
+
+        Task<RegisterConfig> GetRegisterById(int id);
+
         Task<List<ChannelConfig>> GetModbusConfig();
 
         Task Create(ChannelConfig channel);
+
+        Task Create(DeviceConfig device);
+
+        Task Create(RegisterConfig register);
+
+        Task Remove(ChannelConfig channel);
+
+        Task Remove(DeviceConfig device);
+
+        Task Remove(RegisterConfig register);
     }
 }

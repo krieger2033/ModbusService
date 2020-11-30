@@ -12,7 +12,9 @@
             LoadConfig();
             LoadChannelCreateForm();
 
-            $("body").on("change", "#ModbusType", function () { LoadChannelCreateForm($(this).val()) });
+            $("body").on("change", "#ChannelType", function () { LoadChannelCreateForm($(this).val()) });
+
+            $("body").on("change", "#DeviceType", function () { LoadDeviceCreateForm($(this).attr("channelId"), $(this).val()) });
         });
 
         function LoadConfig()
@@ -23,6 +25,16 @@
         function LoadChannelCreateForm(type = 0)
         {
             $("#_FormPartial").load("@Url.Action("ChannelCreate")", "type=" + type);
+        }
+
+        function LoadDeviceCreateForm(channelId, type = 0)
+        {
+            $("#_FormPartial").load("@Url.Action("DeviceCreate")", "channelId=" + channelId + "&type=" + type);
+        }
+
+        function LoadRegisterCreateForm(deviceId)
+        {
+            $("#_FormPartial").load("@Url.Action("RegisterCreate")", "deviceId=" + deviceId);
         }
     </script>
 }

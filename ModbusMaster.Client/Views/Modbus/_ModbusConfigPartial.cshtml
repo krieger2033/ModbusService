@@ -9,27 +9,27 @@
         @foreach (var channel in Model.ChannelIndexViewModels)
         {
             <li>
-                <span>@channel.Title</span> <a asp-action="Edit">Edit</a>
+                <span>@channel.Title</span>&nbsp;<a asp-action="ChannelDetails">Details</a>&nbsp;<a asp-action="ChannelRemove" asp-route-id="@channel.Id">Delete</a>
                 <ul>
                     @foreach (var device in channel.DevicesListViewModel.DeviceIndexViewModels)
                     {
                         <li>
-                            <span>@device.Title</span> <a asp-action="Edit">Edit</a>
+                            <span>@device.Title</span>&nbsp;<a asp-action="DeviceDetails">Details</a>&nbsp;<a asp-action="DeviceRemove" asp-route-id="@device.Id">Delete</a>
                             <ul>
                                 @foreach (var register in device.RegistersListViewModel.RegisterIndexViewModels)
                                 {
                                     <li>
-                                        <span>@register.Title</span> <a asp-action="Edit">Edit</a>
+                                        <span>@register.Title</span>&nbsp;<a asp-action="RegisterDetails">Details</a>&nbsp;<a asp-action="RegisterRemove" asp-route-id="@register.Id">Delete</a>
                                     </li>
                                 }
                                 <li>
-                                    <a asp-action="Create"><span>Create register group</span></a>
+                                    <a href="#" onclick="LoadRegisterCreateForm(@device.Id)"><span>Create register</span></a>
                                 </li>
                             </ul>
                         </li>
                     }
                     <li>
-                        <a asp-action="Create"><span>Create device</span></a>
+                        <a href="#" onclick="LoadDeviceCreateForm(@channel.Id)"><span>Create device</span></a>
                     </li>
                 </ul>
             </li>
