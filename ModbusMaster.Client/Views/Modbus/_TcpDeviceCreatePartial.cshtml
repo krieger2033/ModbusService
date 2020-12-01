@@ -10,7 +10,7 @@
             @Html.LabelFor(model => model.Type)
         </div>
         <div class="col-sm">
-            @Html.DropDownListFor(model => model.Type, @Html.GetEnumSelectList<DeviceType>(), new { id = "DeviceType", @class = "form-control", channelId = @Model.ChannelId })
+            @Html.DropDownListFor(model => model.Type, @Html.GetEnumSelectList<DeviceType>(), new { id = "DeviceType", @class = "form-control" })
             <span asp-validation-for="Type" class="text-danger"></span>
         </div>
     </div>

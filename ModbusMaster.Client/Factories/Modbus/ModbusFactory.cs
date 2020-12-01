@@ -163,7 +163,7 @@ namespace ModbusMaster.Client.Factories.Modbus
             {
                 ChannelId = model.ChannelId,
                 Title = model.Title,
-                Type = model.Type,
+                Type = DeviceType.ModbusRTU,
                 Identificator = model.Identificator
             };
         }

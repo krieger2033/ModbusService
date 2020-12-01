@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using ModbusMaster.Client.Domain.Entities;
+using ModbusMaster.Domain.Entities;
 
 //using ModbusMaster.Client.Domain.Entities;
 
@@ -10,6 +11,8 @@ namespace ModbusMaster.Client.Services.Interfaces
     public interface IModbusService
     {
         Task<string> GetChannelTitle(int channelId);
+
+        Task<ChannelType> GetChannelType(int channelId);
 
         Task<string> GetDeviceTitle(int deviceId);
 

@@ -13,9 +13,6 @@ namespace ModbusMaster.Client.Models.Modbus
         [Required]
         public int ChannelId { get; set; }
 
-        [Required] 
-        public virtual DeviceType Type { get; set; }
-
         [Required]
         public string Title { get; set; }
     }

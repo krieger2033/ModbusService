@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ModbusMaster.Client.DAL.Interfaces;
 using ModbusMaster.Client.Domain.Entities;
 using ModbusMaster.Client.Services.Interfaces;
+using ModbusMaster.Domain.Entities;
 
 namespace ModbusMaster.Client.Services.Implementations
 {
@@ -34,6 +35,11 @@ namespace ModbusMaster.Client.Services.Implementations
         public async Task<string> GetChannelTitle(int channelId)
         {
             return (await _unitOfWork.ChannelsRepository.GetSingle(c => c.Id == channelId)).Title;
+        }
+
+        public async Task<ChannelType> GetChannelType(int channelId)
+        {
+            return (await _unitOfWork.ChannelsRepository.GetSingle(c => c.Id == channelId)).Type;
         }
 
         public async Task<string> GetDeviceTitle(int deviceId)

@@ -80,16 +80,18 @@ namespace ModbusMaster.Client.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async Task<IActionResult> DeviceCreate(int channelId, DeviceType type = DeviceType.ModbusRTU)
+        public async Task<IActionResult> DeviceCreate(int channelId)
         {
             //TODO: channel existence check; channel\device type constraint
 
-            if (type == DeviceType.ModbusTCP)
+            ChannelType channelType = await _modbusService.GetChannelType(channelId);
+
+            if (channelType == ChannelType.SerialPort)
             {
-                return PartialView("_TcpDeviceCreatePartial", await _modbusFactory.GetTcpDeviceCreateViewModel(channelId));
+                return PartialView("_RtuDeviceCreatePartial", await _modbusFactory.GetRtuDeviceCreateViewModel(channelId));
             }
 
-            return PartialView("_RtuDeviceCreatePartial", await _modbusFactory.GetRtuDeviceCreateViewModel(channelId));
+            return PartialView("_TcpDeviceCreatePartial", await _modbusFactory.GetTcpDeviceCreateViewModel(channelId));
         }
 
         [HttpPost]
