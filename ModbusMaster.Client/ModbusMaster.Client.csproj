@@ -21,7 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ModbusMaster.Client.DAL\ModbusMaster.Client.DAL.csproj" />
     <ProjectReference Include="..\ModbusMaster.Client.Services\ModbusMaster.Client.Services.csproj" />
-    <ProjectReference Include="..\ModbusMaster.DAL\ModbusMaster.DAL.csproj" />
   </ItemGroup>
 
   <ProjectExtensions><VisualStudio><UserProperties properties_4launchsettings_1json__JsonSchema="Cl" /></VisualStudio></ProjectExtensions>

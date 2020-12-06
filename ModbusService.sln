@@ -30,12 +30,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Client.Service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.Client", "ModbusMaster.Client\ModbusMaster.Client.csproj", "{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModbusMaster.DAL", "ModbusMaster.DAL\ModbusMaster.DAL.csproj", "{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{570AA86C-FB11-44BC-ADDB-319CEEEB637A} = {570AA86C-FB11-44BC-ADDB-319CEEEB637A}
-		{069639B1-DBAC-4608-BD1D-3ACAE253069D} = {069639B1-DBAC-4608-BD1D-3ACAE253069D}
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -162,18 +156,6 @@ Global
 		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Release|x64.Build.0 = Release|Any CPU
 		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Release|x86.ActiveCfg = Release|Any CPU
 		{AF0982BD-C2DC-438B-B0D1-B7EF3FFFCB1B}.Release|x86.Build.0 = Release|Any CPU
-		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Debug|x64.Build.0 = Debug|Any CPU
-		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Debug|x86.Build.0 = Debug|Any CPU
-		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Release|x64.ActiveCfg = Release|Any CPU
-		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Release|x64.Build.0 = Release|Any CPU
-		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Release|x86.ActiveCfg = Release|Any CPU
-		{554DCBBA-A6B8-4751-A3E0-4040F019CDC8}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

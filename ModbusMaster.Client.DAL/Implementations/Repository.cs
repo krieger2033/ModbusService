@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ModbusMaster.Client.DAL.Interfaces;
-using ModbusMaster.DAL;
+using ModbusMaster.Client.DAL;
 using ModbusMaster.Domain.Entities;
 
 namespace ModbusMaster.Client.DAL.Implementations

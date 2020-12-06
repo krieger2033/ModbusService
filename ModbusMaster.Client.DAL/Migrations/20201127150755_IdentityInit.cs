@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Migrations;
 using Oracle.EntityFrameworkCore.Metadata;
 
-namespace ModbusMaster.DAL.Migrations.Client
+namespace ModbusMaster.Client.DAL.Migrations
 {
     public partial class IdentityInit : Migration
     {

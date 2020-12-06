@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ModbusMaster.Client.Domain\ModbusMaster.Client.Domain.csproj" />
-    <ProjectReference Include="..\ModbusMaster.DAL\ModbusMaster.DAL.csproj" />
     <ProjectReference Include="..\ModbusMaster.Domain\ModbusMaster.Domain.csproj" />
   </ItemGroup>
 

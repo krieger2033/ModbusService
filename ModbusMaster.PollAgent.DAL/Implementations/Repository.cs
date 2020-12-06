@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-using ModbusMaster.DAL;
 using ModbusMaster.Domain.Entities;
 using ModbusMaster.PollAgent.DAL.Interfaces;
 

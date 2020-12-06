@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-using ModbusMaster.DAL;
+using ModbusMaster.PollAgent.DAL;
 using ModbusMaster.PollAgent.DAL.Implementations;
 using ModbusMaster.PollAgent.DAL.Interfaces;
 using ModbusMaster.PollAgent.Services.Implementations;

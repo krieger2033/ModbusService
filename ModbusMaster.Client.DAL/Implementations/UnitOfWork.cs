@@ -2,8 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ModbusMaster.Client.DAL.Interfaces;
 using ModbusMaster.Client.Domain.Entities;
-using ModbusMaster.DAL;
-using ModbusMaster.Domain.Entities;
+using ModbusMaster.Client.DAL;
 
 namespace ModbusMaster.Client.DAL.Implementations
 {

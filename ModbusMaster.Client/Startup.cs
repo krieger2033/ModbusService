@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-using ModbusMaster.DAL;
+using ModbusMaster.Client.DAL;
 using ModbusMaster.Client.DAL.Implementations;
 using ModbusMaster.Client.DAL.Interfaces;
 using ModbusMaster.Client.Domain.Entities;

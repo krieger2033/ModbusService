@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ModbusMaster.Client.Domain.Entities;
 
-namespace ModbusMaster.DAL
+namespace ModbusMaster.Client.DAL
 {
     public class ModbusClientContext : IdentityDbContext<ApplicationUser, ApplicationRole, string, IdentityUserClaim<string>,
         ApplicationUserRole, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>

@@ -1,5 +1,4 @@
-﻿using ModbusMaster.DAL;
-using ModbusMaster.Domain.Entities;
+﻿using ModbusMaster.Domain.Entities;
 using ModbusMaster.PollAgent.DAL.Interfaces;
 
 namespace ModbusMaster.PollAgent.DAL.Implementations

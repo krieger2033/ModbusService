@@ -4,7 +4,6 @@ using System.Linq;
 
 using Microsoft.EntityFrameworkCore;
 
-using ModbusMaster.DAL;
 using ModbusMaster.Domain.Entities;
 using ModbusMaster.PollAgent.DAL.Interfaces;
 
