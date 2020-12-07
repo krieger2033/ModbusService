@@ -1,3 +1,4 @@
+using System.Data.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -32,8 +33,11 @@ namespace ModbusMaster.Client
             services.AddDbContext<ModbusClientContext>(options =>
                 options.UseOracle(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDbContext<ModbusIdentityContext>(options =>
+                options.UseOracle(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddIdentity<ApplicationUser, ApplicationRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ModbusClientContext>();
+                .AddEntityFrameworkStores<ModbusIdentityContext>();
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IModbusService, ModbusService>();

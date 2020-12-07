@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ModbusMaster.Client.Domain.Entities;
 
 namespace ModbusMaster.Client.DAL
 {
-    public class ModbusClientContext : IdentityDbContext<ApplicationUser, ApplicationRole, string, IdentityUserClaim<string>,
-        ApplicationUserRole, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>
+    public class ModbusClientContext : DbContext
     {
         public DbSet<ChannelConfig> Channels { get; set; }
         public DbSet<DeviceConfig> Devices { get; set; }
@@ -22,39 +19,19 @@ namespace ModbusMaster.Client.DAL
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ApplicationUserRole>(userRole =>
-            {
-                userRole.HasKey(ur => new { ur.UserId, ur.RoleId });
-
-                userRole.HasOne(ur => ur.Role)
-                    .WithMany(r => r.UserRoles)
-                    .HasForeignKey(ur => ur.RoleId)
-                    .IsRequired();
-
-                userRole.HasOne(ur => ur.User)
-                    .WithMany(r => r.UserRoles)
-                    .HasForeignKey(ur => ur.UserId)
-                    .IsRequired();
-            });
-
             modelBuilder.Entity<ChannelConfig>(channel =>
             {
-                channel.HasIndex(c => new { c.Title, c.UserId }).IsUnique();
-
-                channel.HasOne(c => c.User)
-                    .WithMany(u => u.Channels)
-                    .HasForeignKey(c => c.UserId)
-                    .IsRequired();
-            });
-
-            modelBuilder.Entity<DeviceConfig>(channel =>
-            {
                 channel.HasIndex(c => new { c.Title }).IsUnique();
             });
 
-            modelBuilder.Entity<RegisterConfig>(channel =>
+            modelBuilder.Entity<DeviceConfig>(device =>
             {
-                channel.HasIndex(c => new { c.Title }).IsUnique();
+                device.HasIndex(d => new { d.Title }).IsUnique();
+            });
+
+            modelBuilder.Entity<RegisterConfig>(register =>
+            {
+                register.HasIndex(r => new { r.Title }).IsUnique();
             });
         }
     }

@@ -6,7 +6,5 @@ namespace ModbusMaster.Client.Domain.Entities
     public class ApplicationUser : IdentityUser
     {
         public ICollection<ApplicationUserRole> UserRoles { get; set; }
-
-        public ICollection<ChannelConfig> Channels { get; set; }
     }
 }

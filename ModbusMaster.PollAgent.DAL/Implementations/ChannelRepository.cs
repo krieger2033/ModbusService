@@ -10,7 +10,7 @@ namespace ModbusMaster.PollAgent.DAL.Implementations
 {
     internal class ChannelRepository : Repository<Channel>, IChannelRepository
     {
-        public ChannelRepository(ModbusDumpContext context) : base(context)
+        public ChannelRepository(ModbusPollContext context) : base(context)
         {
         }
 

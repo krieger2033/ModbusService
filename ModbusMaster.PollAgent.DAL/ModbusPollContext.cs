@@ -3,21 +3,15 @@ using ModbusMaster.Domain.Entities;
 
 namespace ModbusMaster.PollAgent.DAL
 {
-    public class ModbusDumpContext : DbContext
+    public class ModbusPollContext : DbContext
     {
         public DbSet<Channel> Channels { get; set; }
         public DbSet<Device> Devices { get; set; }
         public DbSet<Register> Registers { get; set; }
         public DbSet<Dump> Dumps { get; set; }
 
-        public ModbusDumpContext(DbContextOptions options) : base(options)
+        public ModbusPollContext(DbContextOptions options) : base(options)
         {
-            
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            //modelBuilder.SeedPollAgent();
         }
     }
 }

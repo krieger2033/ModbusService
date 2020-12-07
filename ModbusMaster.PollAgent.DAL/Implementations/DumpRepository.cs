@@ -11,7 +11,7 @@ namespace ModbusMaster.PollAgent.DAL.Implementations
 {
     internal class DumpRepository : Repository<Dump>, IDumpRepository
     {
-        public DumpRepository(ModbusDumpContext context) : base(context)
+        public DumpRepository(ModbusPollContext context) : base(context)
         {
         }
 

@@ -9,11 +9,6 @@ namespace ModbusMaster.Client.Domain.Entities
         [Required]
         public string Title { get; set; }
 
-        [Required]
-        public string UserId { get; set; }
-
-        public ApplicationUser User { get; set; }
-
         public new ICollection<DeviceConfig> Devices { get; set; }
     }
 }

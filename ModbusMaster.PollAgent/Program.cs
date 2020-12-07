@@ -24,7 +24,7 @@ namespace ModbusMaster.PollAgent
                 {
                     IConfiguration config = hostContext.Configuration;
 
-                    services.AddDbContext<ModbusDumpContext>(
+                    services.AddDbContext<ModbusPollContext>(
                         options => options.UseOracle(config.GetConnectionString("DefaultConnection")), 
                         ServiceLifetime.Transient, 
                         ServiceLifetime.Transient

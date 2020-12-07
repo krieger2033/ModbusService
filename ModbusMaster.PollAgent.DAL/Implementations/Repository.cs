@@ -10,9 +10,9 @@ namespace ModbusMaster.PollAgent.DAL.Implementations
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        protected ModbusDumpContext _context;
+        protected ModbusPollContext _context;
 
-        public Repository(ModbusDumpContext context)
+        public Repository(ModbusPollContext context)
         {
             _context = context;
         }

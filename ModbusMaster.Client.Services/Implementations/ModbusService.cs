@@ -17,19 +17,11 @@ namespace ModbusMaster.Client.Services.Implementations
 {
     public class ModbusService : IModbusService
     {
-        private readonly IHttpContextAccessor _contextAccessor;
-
         private readonly IUnitOfWork _unitOfWork;
 
-        public ModbusService(IHttpContextAccessor contextAccessor, IUnitOfWork unitOfWork)
+        public ModbusService(IUnitOfWork unitOfWork)
         {
-            _contextAccessor = contextAccessor;
             _unitOfWork = unitOfWork;
-        }
-
-        private string GetCurrentUserId()
-        {
-            return _contextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
         }
 
         public async Task<string> GetChannelTitle(int channelId)
@@ -64,13 +56,11 @@ namespace ModbusMaster.Client.Services.Implementations
 
         public async Task<List<ChannelConfig>> GetModbusConfig()
         {
-            return await _unitOfWork.ChannelsRepository.GetConfig(GetCurrentUserId());
+            return await _unitOfWork.ChannelsRepository.GetConfig();
         }
 
         public async Task Create(ChannelConfig channel)
         {
-            channel.UserId = GetCurrentUserId();
-
             _unitOfWork.ChannelsRepository.Insert(channel);
             await _unitOfWork.SaveChangesAsync();
         }

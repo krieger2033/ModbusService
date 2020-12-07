@@ -6,6 +6,6 @@ namespace ModbusMaster.Client.DAL.Interfaces
 {
     public interface IChannelRepository: IRepository<ChannelConfig>
     {
-        Task<List<ChannelConfig>> GetConfig(string userId);
+        Task<List<ChannelConfig>> GetConfig();
     }
 }

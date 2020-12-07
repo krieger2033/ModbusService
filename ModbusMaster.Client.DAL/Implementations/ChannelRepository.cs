@@ -15,10 +15,9 @@ namespace ModbusMaster.Client.DAL.Implementations
         {
         }
 
-        public async Task<List<ChannelConfig>> GetConfig(string userId)
+        public async Task<List<ChannelConfig>> GetConfig()
         {
             return await _context.Set<ChannelConfig>()
-                            .Where(c => c.UserId == userId)
                             .Include(x => x.Devices)
                             .ThenInclude(y => y.Registers)
                             .ToListAsync();
