@@ -19,5 +19,7 @@ namespace ModbusMaster.Client.DAL.Interfaces
         void Insert(T entity);
 
         void Delete(T entity);
+
+        void Update(T entity);
     }
 }

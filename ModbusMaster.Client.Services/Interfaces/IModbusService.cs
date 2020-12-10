@@ -35,5 +35,11 @@ namespace ModbusMaster.Client.Services.Interfaces
         Task Remove(DeviceConfig device);
 
         Task Remove(RegisterConfig register);
+
+        Task Update(ChannelConfig channel);
+
+        Task Update(DeviceConfig device);
+
+        Task Update(RegisterConfig register);
     }
 }

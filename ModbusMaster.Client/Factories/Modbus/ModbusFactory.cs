@@ -95,6 +95,7 @@ namespace ModbusMaster.Client.Factories.Modbus
             };
         }
 
+
         public SerialChannelCreateViewModel GetSerialChannelCreateViewModel()
         {
             return new SerialChannelCreateViewModel();
@@ -126,6 +127,51 @@ namespace ModbusMaster.Client.Factories.Modbus
                 StopBits = model.StopBits
             };
         }
+
+        public SerialChannelEditViewModel GetSerialChannelEditViewModel(ChannelConfig channel)
+        {
+            return new SerialChannelEditViewModel()
+            {
+                Id = channel.Id,
+                Title = channel.Title,
+                ComPort = channel.ComPort,
+                Baudrate = channel.Baudrate,
+                StopBits = channel.StopBits,
+                Parity = channel.Parity
+            };
+        }
+
+        public TcpChannelEditViewModel GetTcpChannelEditViewModel(ChannelConfig channel)
+        {
+            return new TcpChannelEditViewModel()
+            {
+                Id = channel.Id,
+                Title = channel.Title
+            };
+        }
+
+        public async Task<ChannelConfig> UpdateChannel(TcpChannelEditViewModel model)
+        {
+            var channel = await _modbusService.GetChannelById(model.Id);
+
+            channel.Title = model.Title;
+
+            return channel;
+        }
+
+        public async Task<ChannelConfig> UpdateChannel(SerialChannelEditViewModel model)
+        {
+            var channel = await _modbusService.GetChannelById(model.Id);
+
+            channel.Title = model.Title;
+            channel.ComPort = model.ComPort;
+            channel.Baudrate = model.Baudrate;
+            channel.StopBits = model.StopBits;
+            channel.Parity = model.Parity;
+
+            return channel;
+        }
+
 
         public async Task<TcpDeviceCreateViewModel> GetTcpDeviceCreateViewModel(int channelId)
         {
@@ -168,6 +214,49 @@ namespace ModbusMaster.Client.Factories.Modbus
             };
         }
 
+        public RtuDeviceEditViewModel GetRtuDeviceEditViewModel(DeviceConfig device)
+        {
+            return new RtuDeviceEditViewModel()
+            {
+                Id = device.Id,
+                Title = device.Title,
+                Identificator = device.Identificator
+            };
+        }
+
+        public TcpDeviceEditViewModel GetTcpDeviceEditViewModel(DeviceConfig device)
+        {
+            return new TcpDeviceEditViewModel()
+            {
+                Id = device.Id,
+                Title = device.Title,
+                Ip = device.Ip,
+                Port = device.Port
+            };
+        }
+
+        public async Task<DeviceConfig> UpdateDevice(TcpDeviceEditViewModel model)
+        {
+            var device = await _modbusService.GetDeviceById(model.Id);
+
+            device.Title = model.Title;
+            device.Ip = model.Ip;
+            device.Port = model.Port;
+
+            return device;
+        }
+
+        public async Task<DeviceConfig> UpdateDevice(RtuDeviceEditViewModel model)
+        {
+            var device = await _modbusService.GetDeviceById(model.Id);
+
+            device.Title = model.Title;
+            device.Identificator = model.Identificator;
+
+            return device;
+        }
+
+
         public async Task<RegisterCreateViewModel> GetRegisterCreateViewModel(int deviceId)
         {
             return new RegisterCreateViewModel()
@@ -187,6 +276,30 @@ namespace ModbusMaster.Client.Factories.Modbus
                 Offset = model.Offset,
                 Count = model.Count
             };
+        }
+
+        public RegisterEditViewModel GetRegisterEditViewModel(RegisterConfig register)
+        {
+            return new RegisterEditViewModel()
+            {
+                Id = register.Id,
+                Title = register.Title,
+                Type = register.Type,
+                Offset = register.Offset,
+                Count = register.Count
+            };
+        }
+
+        public async Task<RegisterConfig> UpdateRegister(RegisterEditViewModel model)
+        {
+            var register = await _modbusService.GetRegisterById(model.Id);
+
+            register.Title = model.Title;
+            register.Type = model.Type;
+            register.Offset = model.Offset;
+            register.Count = model.Count;
+
+            return register;
         }
     }
 }

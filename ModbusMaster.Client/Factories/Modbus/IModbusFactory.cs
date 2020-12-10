@@ -12,9 +12,19 @@ namespace ModbusMaster.Client.Factories.Modbus
 
         TcpChannelCreateViewModel GetTcpChannelCreateViewModel();
 
+
         ChannelConfig GetChannel(TcpChannelCreateViewModel model);
 
         ChannelConfig GetChannel(SerialChannelCreateViewModel model);
+
+        SerialChannelEditViewModel GetSerialChannelEditViewModel(ChannelConfig channel);
+
+        TcpChannelEditViewModel GetTcpChannelEditViewModel(ChannelConfig channel);
+
+        Task<ChannelConfig> UpdateChannel(TcpChannelEditViewModel model);
+
+        Task<ChannelConfig> UpdateChannel(SerialChannelEditViewModel model);
+
 
         Task<TcpDeviceCreateViewModel> GetTcpDeviceCreateViewModel(int channelId);
 
@@ -24,8 +34,21 @@ namespace ModbusMaster.Client.Factories.Modbus
 
         DeviceConfig GetDevice(RtuDeviceCreateViewModel model);
 
+        RtuDeviceEditViewModel GetRtuDeviceEditViewModel(DeviceConfig device);
+
+        TcpDeviceEditViewModel GetTcpDeviceEditViewModel(DeviceConfig device);
+
+        Task<DeviceConfig> UpdateDevice(TcpDeviceEditViewModel model);
+
+        Task<DeviceConfig> UpdateDevice(RtuDeviceEditViewModel model);
+
+
         Task<RegisterCreateViewModel> GetRegisterCreateViewModel(int deviceId);
 
         RegisterConfig GetRegister(RegisterCreateViewModel model);
+
+        RegisterEditViewModel GetRegisterEditViewModel(RegisterConfig register);
+
+        Task<RegisterConfig> UpdateRegister(RegisterEditViewModel model);
     }
 }

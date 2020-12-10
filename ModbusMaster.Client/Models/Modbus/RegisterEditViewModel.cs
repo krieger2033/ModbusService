@@ -1,17 +1,12 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IO.Ports;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using System.ComponentModel.DataAnnotations;
 using ModbusMaster.Domain.Entities;
 
 namespace ModbusMaster.Client.Models.Modbus
 {
-    public class RegisterCreateViewModel
+    public class RegisterEditViewModel
     {
-        public string DeviceTitle { get; set; }
-
         [Required]
-        public int DeviceId { get; set; }
+        public int Id { get; set; }
 
         [Required] 
         public virtual RegisterType Type { get; set; }

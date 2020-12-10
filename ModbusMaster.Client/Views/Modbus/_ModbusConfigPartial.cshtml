@@ -9,17 +9,17 @@
         @foreach (var channel in Model.ChannelIndexViewModels)
         {
             <li>
-                <span>@channel.Title</span>&nbsp;<a asp-action="ChannelDetails">Details</a>&nbsp;<a asp-action="ChannelRemove" asp-route-id="@channel.Id">Delete</a>
+                <span>@channel.Title</span>&nbsp;<a href="#" onclick="LoadChannelEditForm(@channel.Id)">Details</a>
                 <ul>
                     @foreach (var device in channel.DevicesListViewModel.DeviceIndexViewModels)
                     {
                         <li>
-                            <span>@device.Title</span>&nbsp;<a asp-action="DeviceDetails">Details</a>&nbsp;<a asp-action="DeviceRemove" asp-route-id="@device.Id">Delete</a>
+                            <span>@device.Title</span>&nbsp;<a href="#" onclick="LoadDeviceEditForm(@device.Id)">Details</a>
                             <ul>
                                 @foreach (var register in device.RegistersListViewModel.RegisterIndexViewModels)
                                 {
                                     <li>
-                                        <span>@register.Title</span>&nbsp;<a asp-action="RegisterDetails">Details</a>&nbsp;<a asp-action="RegisterRemove" asp-route-id="@register.Id">Delete</a>
+                                        <span>@register.Title</span>&nbsp;<a href="#" onclick="LoadRegisterEditForm(@register.Id)">Details</a>
                                     </li>
                                 }
                                 <li>

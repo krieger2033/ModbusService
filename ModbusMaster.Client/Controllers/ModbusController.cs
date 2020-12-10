@@ -24,6 +24,11 @@ namespace ModbusMaster.Client.Controllers
             _modbusService = modbusService;
         }
 
+        private IActionResult _getDefaultForm()
+        {
+            return PartialView("_TcpChannelCreatePartial", _modbusFactory.GetTcpChannelCreateViewModel());
+        }
+
         // GET: ModbusController
         public IActionResult Index()
         {
@@ -34,6 +39,8 @@ namespace ModbusMaster.Client.Controllers
         {
             return PartialView("_ModbusConfigPartial", await _modbusFactory.GetChannelsListViewModel());
         }
+
+        #region Channel
 
         public IActionResult ChannelCreate(ChannelType type = ChannelType.Tcp)
         {
@@ -80,9 +87,51 @@ namespace ModbusMaster.Client.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> ChannelDetails(int id)
+        {
+            var channel = await _modbusService.GetChannelById(id);
+
+            if (channel.Type == ChannelType.SerialPort)
+            {
+                return PartialView("_SerialChannelEditPartial", _modbusFactory.GetSerialChannelEditViewModel(channel));
+            }
+
+            return PartialView("_TcpChannelEditPartial", _modbusFactory.GetTcpChannelEditViewModel(channel));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TcpChannelUpdate(TcpChannelEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _modbusService.Update(await _modbusFactory.UpdateChannel(model));
+                return _getDefaultForm();
+            }
+
+            return PartialView("_TcpChannelEditPartial", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SerialChannelUpdate(SerialChannelEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _modbusService.Update(await _modbusFactory.UpdateChannel(model));
+                return _getDefaultForm();
+            }
+
+            return PartialView("_SerialChannelEditPartial", model);
+        }
+
+        #endregion
+
+        #region Device
+
         public async Task<IActionResult> DeviceCreate(int channelId)
         {
-            //TODO: channel existence check; channel\device type constraint
+            //TODO: channel existence check;
 
             ChannelType channelType = await _modbusService.GetChannelType(channelId);
 
@@ -101,7 +150,7 @@ namespace ModbusMaster.Client.Controllers
             if (ModelState.IsValid)
             {
                 await _modbusService.Create(_modbusFactory.GetDevice(model));
-                return PartialView("_TcpChannelCreatePartial", _modbusFactory.GetTcpChannelCreateViewModel());
+                return _getDefaultForm();
             }
 
             return PartialView("_TcpDeviceCreatePartial", model);
@@ -114,7 +163,7 @@ namespace ModbusMaster.Client.Controllers
             if (ModelState.IsValid)
             {
                 await _modbusService.Create(_modbusFactory.GetDevice(model));
-                return PartialView("_TcpChannelCreatePartial", _modbusFactory.GetTcpChannelCreateViewModel());
+                return _getDefaultForm();
             }
 
             return PartialView("_RtuDeviceCreatePartial", model);
@@ -126,6 +175,51 @@ namespace ModbusMaster.Client.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> DeviceDetails(int id)
+        {
+            var device = await _modbusService.GetDeviceById(id);
+            ChannelType channelType = await _modbusService.GetChannelType(device.ChannelId);
+
+            if (channelType == ChannelType.SerialPort)
+            {
+                return PartialView("_RtuDeviceEditPartial", _modbusFactory.GetRtuDeviceEditViewModel(device));
+            }
+
+            return PartialView("_TcpDeviceEditPartial", _modbusFactory.GetTcpDeviceEditViewModel(device));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> TcpDeviceUpdate(TcpDeviceEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var device = await _modbusService.GetDeviceById(model.Id);
+                await _modbusService.Update(await _modbusFactory.UpdateDevice(model));
+                return _getDefaultForm();
+            }
+
+            return PartialView("_TcpDeviceEditPartial", model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RtuDeviceUpdate(RtuDeviceEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var device = await _modbusService.GetDeviceById(model.Id);
+                await _modbusService.Update(await _modbusFactory.UpdateDevice(model));
+                return _getDefaultForm();
+            }
+
+            return PartialView("_RtuDeviceEditPartial", model);
+        }
+
+        #endregion
+
+        #region Register
 
         public async Task<IActionResult> RegisterCreate(int deviceId)
         {
@@ -141,7 +235,7 @@ namespace ModbusMaster.Client.Controllers
             if (ModelState.IsValid)
             {
                 await _modbusService.Create(_modbusFactory.GetRegister(model));
-                return PartialView("_TcpChannelCreatePartial", _modbusFactory.GetTcpChannelCreateViewModel());
+                return _getDefaultForm();
             }
 
             return PartialView("_RegisterCreatePartial", model);
@@ -154,47 +248,25 @@ namespace ModbusMaster.Client.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-        // GET: ModbusController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> RegisterDetails(int id)
         {
-            return View();
+            var register = await _modbusService.GetRegisterById(id); 
+            return PartialView("_RegisterEditPartial", _modbusFactory.GetRegisterEditViewModel(register));
         }
 
-        // POST: ModbusController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> RegisterUpdate(RegisterEditViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                await _modbusService.Update(await _modbusFactory.UpdateRegister(model));
+                return _getDefaultForm();
             }
-            catch
-            {
-                return View();
-            }
+
+            return PartialView("_RegisterEditPartial", model);
         }
 
-        // GET: ModbusController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ModbusController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        #endregion
     }
 }

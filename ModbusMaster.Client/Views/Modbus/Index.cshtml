@@ -34,6 +34,21 @@
         {
             $("#_FormPartial").load("@Url.Action("RegisterCreate")", "deviceId=" + deviceId);
         }
+
+        function LoadChannelEditForm(id)
+        {
+            $("#_FormPartial").load("@Url.Action("ChannelDetails")" + "/" + id);
+        }
+
+        function LoadDeviceEditForm(id)
+        {
+            $("#_FormPartial").load("@Url.Action("DeviceDetails")" + "/" + id);
+        }
+
+        function LoadRegisterEditForm(id)
+        {
+            $("#_FormPartial").load("@Url.Action("RegisterDetails")" + "/" + id);
+        }
     </script>
 }
 

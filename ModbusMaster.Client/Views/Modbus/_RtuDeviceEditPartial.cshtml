@@ -1,0 +1,31 @@
+﻿@using ModbusMaster.Domain.Entities
+@model ModbusMaster.Client.Models.Modbus.RtuDeviceEditViewModel
+
+<h2>Editing @Model.Title</h2>
+
+<form method="post" data-ajax="true" data-ajax-method="post" data-ajax-url="@Url.Action("RtuDeviceUpdate")" data-ajax-update="#_FormPartial" data-ajax-complete="LoadConfig">
+    @Html.HiddenFor(model => model.Id)
+    <div class="form-group row">
+        <div class="col-sm-4">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="col-sm">
+            @Html.TextBoxFor(model => model.Title, new {@class = "form-control"})
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-4">
+            @Html.LabelFor(model => model.Identificator)
+        </div>
+        <div class="col-sm">
+            @Html.TextBoxFor(model => model.Identificator, new {@class = "form-control"})
+            <span asp-validation-for="Identificator" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+        &nbsp;
+        <a asp-action="DeviceRemove" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+    </div>
+</form>
